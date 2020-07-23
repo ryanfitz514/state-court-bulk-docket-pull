@@ -30,9 +30,9 @@ class Docket:
         auth_token = authenticate(auth_tuple)
         docket = get_docket(auth_token, docket_number, court_name, client_matter, cached, normalize)
         self.all = docket
-        self.info = docket['info'] if docket['info'] else ""
-        self.docket_report = docket['docket_report'] if docket['docket_report'] else ""
-        self.parties = docket['parties'] if docket['parties'] else ""
+        self.info = docket['info']
+        self.docket_report = docket['docket_report']
+        self.parties = docket['parties']
         # self.related = docket['related']
 
     def links(self):
@@ -140,6 +140,10 @@ def get_docket(auth_token, docket_number, court_name, client_matter="", cached=T
         'cached':cached,
         'normalize':normalize,
     }
-    result = requests.get(endpoint, params).json()
-    return result
+    result = requests.get(endpoint, params)
 
+    result.raise_for_status()
+
+    result = result.json()
+
+    return result

@@ -10,6 +10,8 @@ import get_json, get_pdfs, login, menus, file_browser, global_variables, fetch_u
 import config
 import gui
 
+import download # TESTING
+
 # Inititalizes Colorama functionality, allowing us to write text to the terminal in different colors.
 init()
 
@@ -168,8 +170,8 @@ def get_json_and_pdfs():
     """
 
     # The function that downloads the JSON files
-    # get_json.loop_dataframe()
-    get_json.thread_download_json()
+
+    # get_json.thread_download_json()
 
     # The function that extracts the proper arguments to pass to the function for downloading PDFs using multiprocessing.
     # That function requires a list of tuples, each tuple being a seperate set of arguments to pass.
@@ -177,7 +179,8 @@ def get_json_and_pdfs():
 
     # This function uses threading on the function that downloads PDFs, allowing us to download multiple PDFs at once,
     # speeding up the process.
-    get_pdfs.thread_download_pdfs(link_list)
+    download.thread_download()
+    # get_pdfs.thread_download_pdfs(link_list)
 
 def select_paths_menu(pdfOption=True):
     """

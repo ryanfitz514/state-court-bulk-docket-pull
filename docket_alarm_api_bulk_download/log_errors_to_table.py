@@ -9,14 +9,14 @@ class ErrorTable:
         """
         Initializes an empty dataframe with three column headers
         """
-        self.df = pd.DataFrame(columns=['error', 'docket','document'])
+        self.df = pd.DataFrame(columns=['error','name', 'docketNumber','court','document'])
 
     def __repr__(self):
         # returns the dataframe, using dropna() to remove any null values.
         # Null values usually get added to the class as a glitch.
         return pd.dropna(self.df)
 
-    def append_error_table(self, error, docket, document):
+    def append_error_table(self, error="", name="", docketNumber="", court="", document=""):
         """
         Takes 3 string arguments, adds them to the csv log in order
         """
@@ -25,7 +25,9 @@ class ErrorTable:
         # and will fill in the values with the arguments passed to the method.
         new_row = {
             "error":error,
-            "docket":docket,
+            "name":name,
+            "docketNumber":docketNumber,
+            "court":court,
             "document":document,
         }
         # Then we use append() to add the new values to the dataframe.
